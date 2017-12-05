@@ -1,13 +1,13 @@
 package com.example.OrderManagement.POJO;
 
 import com.example.OrderManagement.entity.Product;
-import com.example.OrderManagement.entity.User;
+import com.example.OrderManagement.entity.Users;
 
 public class OrderDetailsVO {
 	private String shipping_address;
 	private double amount;
 	private Product product;
-	private User user;
+	private Users user;
 	private long credit_card_number;
 	
 	public String getShipping_address() {
@@ -28,10 +28,10 @@ public class OrderDetailsVO {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	public long getCredit_card_number() {

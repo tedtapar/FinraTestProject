@@ -5,7 +5,7 @@ import com.example.OrderManagement.POJO.ProductVO;
 import com.example.OrderManagement.POJO.UserVO;
 import com.example.OrderManagement.entity.OrderDetails;
 import com.example.OrderManagement.entity.Product;
-import com.example.OrderManagement.entity.User;
+import com.example.OrderManagement.entity.Users;
 
 public class DomainVOConverter {
 
@@ -16,8 +16,8 @@ public class DomainVOConverter {
 		return product;
 	}  
 	
-	public static User convertUserVotoUser(UserVO userVO){
-		User user= new User();
+	public static Users convertUserVotoUser(UserVO userVO){
+		Users user= new Users();
 		user.setName(userVO.getName());
 		user.setEmail(userVO.getEmail());
 		user.setAddress(userVO.getAddress());

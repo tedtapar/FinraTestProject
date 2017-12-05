@@ -22,7 +22,7 @@ public class OrderDetails {
 	private Product product;
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
-	private User user;
+	private Users user;
 	private long credit_card_number;
 	
 	
@@ -50,10 +50,10 @@ public class OrderDetails {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	public long getCredit_card_number() {
