@@ -2,6 +2,8 @@ package com.example.OrderManagement.service;
 
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 	}
 
 	public boolean verifyCard(String creditCardNumber, double amount){
+		
 		if(chargePayment(creditCardNumber, amount)){
 			return true;
 		}
@@ -49,6 +52,7 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 		
 		if(isValid(creditCardNumber)){
 			amount= addAdditionalFee(amount);
+			//Charge the card with the amount;
         	return true;
 		}
 		
@@ -71,16 +75,17 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 		return amount+additionalFee;
 	}
 	@Override
-	public void placeOrder(OrderDetailsVO orderDetailsVO) throws Exception{
+	@Transactional
+	public boolean placeOrder(OrderDetailsVO orderDetailsVO) throws Exception{
 		if (verifyCard(Long.toString(orderDetailsVO.getCredit_card_number()),orderDetailsVO.getAmount())){
 			OrderDetails orderDetails= DomainVOConverter.convertOrderDetailsVOtoOrderDetails(orderDetailsVO);
 			OrderDetails orderDetailsReturned= orderDetailsDAO.save(orderDetails);
 			if(orderDetailsReturned!=null){	
-				// Call the payment API methods to charge the payment
 				sendEmail(orderDetailsReturned);
+				return true;
 			}
 		}
-		
+		return false;
 	}
 	
 	private void sendEmail(OrderDetails orderDetails) throws Exception{
