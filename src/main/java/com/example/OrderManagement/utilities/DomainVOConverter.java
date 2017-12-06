@@ -11,7 +11,7 @@ public class DomainVOConverter {
 
 	public static Product convertProdVOtoProd(ProductVO prodVO){
 		Product product = new Product();
-		product.setProduct_name(prodVO.getProduct_name());
+		product.setProductName(prodVO.getProductName());
 		product.setQuantity(prodVO.getQuantity());
 		return product;
 	}  
@@ -21,7 +21,7 @@ public class DomainVOConverter {
 		user.setName(userVO.getName());
 		user.setEmail(userVO.getEmail());
 		user.setAddress(userVO.getAddress());
-		user.setPhone_number(userVO.getPhone_number());
+		user.setPhoneNumber(userVO.getPhoneNumber());
 		return user;
 	}
 	
@@ -30,8 +30,8 @@ public class DomainVOConverter {
 		orderDetails.setUser(orderdDetailsVO.getUser());
 		orderDetails.setProduct(orderdDetailsVO.getProduct());
 		orderDetails.setAmount(orderdDetailsVO.getAmount());
-		orderdDetailsVO.setCredit_card_number(orderdDetailsVO.getCredit_card_number());
-		orderDetails.setShipping_address(orderdDetailsVO.getShipping_address());
+		orderdDetailsVO.setCreditCardNumber(orderdDetailsVO.getCreditCardNumber());
+		orderDetails.setShippingAddress(orderdDetailsVO.getShippingAddress());
 		return orderDetails;
 	}
 }

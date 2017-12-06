@@ -29,7 +29,8 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 	ProductDAO productDAO;
 	@Autowired
 	ChargeService chargeService;
-	
+	@Autowired
+	EmailService emailService;
 	
 	/**
 	 *@Autowired
@@ -53,11 +54,11 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 	@Transactional
 	public void placeOrder(OrderDetailsVO orderDetailsVO) throws CreditCardException,ProductException,EmailException{
 		OrderDetails orderDetails= DomainVOConverter.convertOrderDetailsVOtoOrderDetails(orderDetailsVO);
-		if(checkInventory(Long.toString(orderDetails.getProduct().getProduct_id()),(int) orderDetails.getProduct().getQuantity() )){
+		if(checkInventory(Long.toString(orderDetails.getProduct().getProductId()),(int) orderDetails.getProduct().getQuantity() )){
 			if (chargeService.chargePayment(orderDetails.getCredit_card_number(), orderDetails.getAmount()) ){	
 				OrderDetails orderDetailsReturned= orderDetailsDAO.save(orderDetails);
 				if(orderDetailsReturned!=null){	
-					sendEmail(orderDetailsReturned);
+					emailService.sendEmail(orderDetailsReturned.toString(), EmailService.to, EmailService.from);
 				}
 			} 
 			else
@@ -67,15 +68,5 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 			{throw new ProductException("Product Out of Stock");}
 	}
 	
-	private void sendEmail(OrderDetails orderDetails) throws EmailException{
-				/**
-				 * MimeMessage message = sender.createMimeMessage();
-				 * MimeMessageHelper helper = new MimeMessageHelper(message);
-		         * helper.setTo("recipient-email@gmail.com");
-		         * helper.setText(orderDetails);	
-		         * helper.setSubject("Hi");
-		         * sender.send(message);
-				 */
-		    }
-
+	
 }

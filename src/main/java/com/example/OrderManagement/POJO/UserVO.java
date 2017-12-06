@@ -3,7 +3,7 @@ package com.example.OrderManagement.POJO;
 public class UserVO {
 	private String name;
 	private String email;
-	private String phone_number;
+	private String phoneNumber;
 	private String address;
 	public String getName() {
 		return name;
@@ -17,11 +17,11 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phone_number) {
+		this.phoneNumber = phone_number;
 	}
 	public String getAddress() {
 		return address;

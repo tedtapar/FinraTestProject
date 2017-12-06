@@ -9,10 +9,10 @@ import javax.persistence.Id;
 public class Users {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long user_id;
+	private long userId;
 	private String name;
 	private String email;
-	private String phone_number;
+	private String phoneNumber;
 	private String address;
 	
 	public Users(){
@@ -21,17 +21,17 @@ public class Users {
 	
 	public Users(long user_id, String name, String email, String phone_number, String address) {
 		super();
-		this.user_id = user_id;
+		this.userId = user_id;
 		this.name = name;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phoneNumber = phone_number;
 		this.address = address;
 	}
-	public long getUser_id() {
-		return user_id;
+	public long getUserId() {
+		return userId;
 	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setUserId(long user_id) {
+		this.userId = user_id;
 	}
 	public String getName() {
 		return name;
@@ -45,11 +45,11 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phone_number) {
+		this.phoneNumber = phone_number;
 	}
 	public String getAddress() {
 		return address;
@@ -60,7 +60,7 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [user_id=" + user_id + ", name=" + name + ", email=" + email + ", phone_number=" + phone_number
+		return "Users [user_id=" + userId + ", name=" + name + ", email=" + email + ", phone_number=" + phoneNumber
 				+ ", address=" + address + "]";
 	}
 

@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long product_id;
-	private String product_name;
+	private long productId;
+	private String productName;
 	private long quantity;
 	
 	public Product(){
@@ -19,22 +19,22 @@ public class Product {
 	
 	public Product(long product_id, String product_name, long quantity) {
 		super();
-		this.product_id = product_id;
-		this.product_name = product_name;
+		this.productId = product_id;
+		this.productName = product_name;
 		this.quantity = quantity;
 	}
 	
-	public long getProduct_id() {
-		return product_id;
+	public long getProductId() {
+		return productId;
 	}
-	public void setProduct_id(long product_id) {
-		this.product_id = product_id;
+	public void setProductId(long product_id) {
+		this.productId = product_id;
 	}
-	public String getProduct_name() {
-		return product_name;
+	public String getProductName() {
+		return productName;
 	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String product_name) {
+		this.productName = product_name;
 	}
 	public long getQuantity() {
 		return quantity;
@@ -45,6 +45,6 @@ public class Product {
 	
 	@Override
 	public String toString() {
-		return "products [product_id=" + product_id + ", product_name=" + product_name + ", quantity=" + quantity + "]";
+		return "products [product_id=" + productId + ", product_name=" + productName + ", quantity=" + quantity + "]";
 	}
 }

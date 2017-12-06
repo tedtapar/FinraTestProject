@@ -15,8 +15,8 @@ import javax.persistence.OneToOne;
 public class OrderDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long order_id;
-	private String shipping_address;
+	private long orderId;
+	private String shippingAddress;
 	private BigDecimal amount;
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
@@ -28,17 +28,17 @@ public class OrderDetails {
 	private String credit_card_number;
 	
 	
-	public long getOrder_id() {
-		return order_id;
+	public long getOrderId() {
+		return orderId;
 	}
-	public void setOrder_id(long order_id) {
-		this.order_id = order_id;
+	public void setOrderId(long order_id) {
+		this.orderId = order_id;
 	}
-	public String getShipping_address() {
-		return shipping_address;
+	public String getShippingAddress() {
+		return shippingAddress;
 	}
-	public void setShipping_address(String shipping_address) {
-		this.shipping_address = shipping_address;
+	public void setShippingAddress(String shipping_address) {
+		this.shippingAddress = shipping_address;
 	}
 	public BigDecimal getAmount() {
 		return amount;
@@ -66,7 +66,7 @@ public class OrderDetails {
 	}
 	@Override
 	public String toString() {
-		return "OrderDetails [order_id=" + order_id + ", shipping_address=" + shipping_address + ", amount=" + amount
+		return "OrderDetails [order_id=" + orderId + ", shipping_address=" + shippingAddress + ", amount=" + amount
 				+ ", product=" + product + ", user=" + user + ", credit_card_number=" + credit_card_number + "]";
 	}
 	

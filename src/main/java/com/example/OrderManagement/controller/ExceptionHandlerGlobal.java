@@ -17,7 +17,7 @@ public class ExceptionHandlerGlobal {
     @ExceptionHandler(Exception.class)
     public String error(Exception e){
         logger.error("Exception ",e);
-        return "redirect:/server_error";
+        return "redirect:/";
     }
     @ExceptionHandler(value = {ProductException.class, EmailException.class})
     public ResponseEntity<?> ProductError(Exception e) {

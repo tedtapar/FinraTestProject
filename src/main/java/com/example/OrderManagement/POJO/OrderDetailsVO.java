@@ -6,17 +6,17 @@ import com.example.OrderManagement.entity.Product;
 import com.example.OrderManagement.entity.Users;
 
 public class OrderDetailsVO {
-	private String shipping_address;
+	private String shippingAddress;
 	private BigDecimal amount;
 	private Product product;
 	private Users user;
-	private String credit_card_number;
+	private String creditCardNumber;
 	
-	public String getShipping_address() {
-		return shipping_address;
+	public String getShippingAddress() {
+		return shippingAddress;
 	}
-	public void setShipping_address(String shipping_address) {
-		this.shipping_address = shipping_address;
+	public void setShippingAddress(String shipping_address) {
+		this.shippingAddress = shipping_address;
 	}
 	public BigDecimal getAmount() {
 		return amount;
@@ -36,10 +36,10 @@ public class OrderDetailsVO {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	public String getCredit_card_number() {
-		return credit_card_number;
+	public String getCreditCardNumber() {
+		return creditCardNumber;
 	}
-	public void setCredit_card_number(String credit_card_number) {
-		this.credit_card_number = credit_card_number;
+	public void setCreditCardNumber(String credit_card_number) {
+		this.creditCardNumber = credit_card_number;
 	}
 }

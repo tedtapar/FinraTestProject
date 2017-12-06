@@ -2,14 +2,14 @@ package com.example.OrderManagement.POJO;
 
 public class ProductVO {
 
-	private String product_name;
+	private String productName;
 	private long quantity;
 	
-	public String getProduct_name() {
-		return product_name;
+	public String getProductName() {
+		return productName;
 	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String product_name) {
+		this.productName = product_name;
 	}
 	public long getQuantity() {
 		return quantity;
