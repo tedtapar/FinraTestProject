@@ -3,6 +3,9 @@ package com.example.OrderManagement;
 
 
 import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyString;
+
+import static org.mockito.Matchers.any;
 
 import java.math.BigDecimal;
 
@@ -39,7 +42,7 @@ public class OrderManagementApplicationTests {
 	OrderDetailsDAO ordDAO;
 	
 	@Mock
-	ChargeService chargeService;
+	ChargeService chargeService ;
 	
 	@InjectMocks
 	OrderServiceDetailsImpl ordService;
@@ -81,7 +84,7 @@ public class OrderManagementApplicationTests {
 	@Test(expected = Test.None.class)
 	public void placeOrderTest() throws Exception {	
 		when(productDAO.findOne(product.getProduct_id())).thenReturn(product);
-		when(chargeService.chargePayment(credit_card_number,amount)).thenReturn(true);
+		when(chargeService.chargePayment(anyString(),any(BigDecimal.class))).thenReturn(true);
 	    ordService.placeOrder(ordDetails);
 	}
 	
