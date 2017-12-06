@@ -1,14 +1,16 @@
 package com.example.OrderManagement.POJO;
 
+import java.math.BigDecimal;
+
 import com.example.OrderManagement.entity.Product;
 import com.example.OrderManagement.entity.Users;
 
 public class OrderDetailsVO {
 	private String shipping_address;
-	private double amount;
+	private BigDecimal amount;
 	private Product product;
 	private Users user;
-	private long credit_card_number;
+	private String credit_card_number;
 	
 	public String getShipping_address() {
 		return shipping_address;
@@ -16,10 +18,10 @@ public class OrderDetailsVO {
 	public void setShipping_address(String shipping_address) {
 		this.shipping_address = shipping_address;
 	}
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	public Product getProduct() {
@@ -34,10 +36,10 @@ public class OrderDetailsVO {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	public long getCredit_card_number() {
+	public String getCredit_card_number() {
 		return credit_card_number;
 	}
-	public void setCredit_card_number(long credit_card_number) {
+	public void setCredit_card_number(String credit_card_number) {
 		this.credit_card_number = credit_card_number;
 	}
 }

@@ -2,6 +2,8 @@ package com.example.OrderManagement.service;
 
 
 
+
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import com.example.OrderManagement.DAO.ProductDAO;
 import com.example.OrderManagement.POJO.OrderDetailsVO;
 import com.example.OrderManagement.entity.OrderDetails;
 import com.example.OrderManagement.entity.Product;
+import com.example.OrderManagement.exception.CreditCardException;
+import com.example.OrderManagement.exception.EmailException;
+import com.example.OrderManagement.exception.ProductException;
 import com.example.OrderManagement.utilities.DomainVOConverter;
 
 @Service
@@ -22,6 +27,9 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 	OrderDetailsDAO orderDetailsDAO;
 	@Autowired
 	ProductDAO productDAO;
+	@Autowired
+	ChargeService chargeService;
+	
 	
 	/**
 	 *@Autowired
@@ -34,61 +42,32 @@ public class OrderServiceDetailsImpl implements OrderDetailsService {
 	@Override
 	public boolean checkInventory(String productId, int quantity) {
 		Product product= productDAO.findOne(Long.parseLong(productId));
-		if(product.getQuantity()>0)
+		if(product.getQuantity()>=quantity)
 			return true;
 		return false;
 	}
 
-	public boolean verifyCard(String creditCardNumber, double amount){
-		
-		if(chargePayment(creditCardNumber, amount)){
-			return true;
-		}
-		return false;
-	}
-	
-	
-	public boolean chargePayment(String creditCardNumber, double amount) {
-		
-		if(isValid(creditCardNumber)){
-			amount= addAdditionalFee(amount);
-			//Charge the card with the amount;
-        	return true;
-		}
-		
-		return false;
-	}
-	
-	private boolean isValid(String CreditCardNumber){
-		/**
-		 * Call the 3rd party API for verification, for simplicity 
-		 * the credit card number has been hard coded
-		 */
-		if(Long.parseLong(CreditCardNumber)==0000000000000000)
-			return true;
-		else
-			return false;
-	}
-	
-	private double addAdditionalFee(double amount){
-		double additionalFee=amount*0.005;
-		return amount+additionalFee;
-	}
+
+
 	@Override
 	@Transactional
-	public boolean placeOrder(OrderDetailsVO orderDetailsVO) throws Exception{
-		if (verifyCard(Long.toString(orderDetailsVO.getCredit_card_number()),orderDetailsVO.getAmount())){
-			OrderDetails orderDetails= DomainVOConverter.convertOrderDetailsVOtoOrderDetails(orderDetailsVO);
-			OrderDetails orderDetailsReturned= orderDetailsDAO.save(orderDetails);
-			if(orderDetailsReturned!=null){	
-				sendEmail(orderDetailsReturned);
-				return true;
-			}
+	public void placeOrder(OrderDetailsVO orderDetailsVO) throws CreditCardException,ProductException,EmailException{
+		OrderDetails orderDetails= DomainVOConverter.convertOrderDetailsVOtoOrderDetails(orderDetailsVO);
+		if(checkInventory(Long.toString(orderDetails.getProduct().getProduct_id()),(int) orderDetails.getProduct().getQuantity() )){
+			if (chargeService.chargePayment(orderDetails.getCredit_card_number(), orderDetails.getAmount()) ){	
+				OrderDetails orderDetailsReturned= orderDetailsDAO.save(orderDetails);
+				if(orderDetailsReturned!=null){	
+					sendEmail(orderDetailsReturned);
+				}
+			} 
+			else
+				{throw new CreditCardException("Invalid Card!");}
 		}
-		return false;
+		else
+			{throw new ProductException("Product Out of Stock");}
 	}
 	
-	private void sendEmail(OrderDetails orderDetails) throws Exception{
+	private void sendEmail(OrderDetails orderDetails) throws EmailException{
 				/**
 				 * MimeMessage message = sender.createMimeMessage();
 				 * MimeMessageHelper helper = new MimeMessageHelper(message);

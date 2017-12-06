@@ -1,5 +1,7 @@
 package com.example.OrderManagement.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +17,7 @@ public class OrderDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long order_id;
 	private String shipping_address;
-	private double amount;
+	private BigDecimal amount;
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -23,7 +25,7 @@ public class OrderDetails {
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	private Users user;
-	private long credit_card_number;
+	private String credit_card_number;
 	
 	
 	public long getOrder_id() {
@@ -38,10 +40,10 @@ public class OrderDetails {
 	public void setShipping_address(String shipping_address) {
 		this.shipping_address = shipping_address;
 	}
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	public Product getProduct() {
@@ -56,10 +58,10 @@ public class OrderDetails {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	public long getCredit_card_number() {
+	public String getCredit_card_number() {
 		return credit_card_number;
 	}
-	public void setCredit_card_number(long credit_card_number) {
+	public void setCredit_card_number(String credit_card_number) {
 		this.credit_card_number = credit_card_number;
 	}
 	@Override
